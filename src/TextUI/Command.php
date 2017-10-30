@@ -583,8 +583,12 @@ class Command
                     $this->arguments['reportUselessTests'] = false;
                     break;
 
-                case '--strict-coverage':
-                    $this->arguments['strictCoverage'] = true;
+                case '--strict-covers-coverage':
+                    $this->arguments['strictCoversCoverage'] = true;
+                    break;
+
+                case '--strict-uses-coverage':
+                    $this->arguments['strictUsesCoverage'] = true;
                     break;
 
                 case '--disable-coverage-ignore':

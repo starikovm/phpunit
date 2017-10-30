@@ -431,11 +431,15 @@ class TestRunner extends BaseTestRunner
             );
 
             $codeCoverage->setCheckForUnintentionallyCoveredCode(
-                $arguments['strictCoverage']
+                $arguments['strictCoversCoverage'] || $arguments['strictUsesCoverage']
             );
 
             $codeCoverage->setCheckForMissingCoversAnnotation(
-                $arguments['strictCoverage']
+                $arguments['strictCoversCoverage']
+            );
+
+            $codeCoverage->setCheckForMissingUsesAnnotation(
+                $arguments['strictUsesCoverage']
             );
 
             if (isset($arguments['forceCoversAnnotation'])) {
@@ -852,8 +856,12 @@ class TestRunner extends BaseTestRunner
                 $arguments['reportUselessTests'] = $phpunitConfiguration['reportUselessTests'];
             }
 
-            if (isset($phpunitConfiguration['strictCoverage']) && !isset($arguments['strictCoverage'])) {
-                $arguments['strictCoverage'] = $phpunitConfiguration['strictCoverage'];
+            if (isset($phpunitConfiguration['strictCoversCoverage']) && !isset($arguments['strictCoversCoverage'])) {
+                $arguments['strictCoversCoverage'] = $phpunitConfiguration['strictCoversCoverage'];
+            }
+
+            if (isset($phpunitConfiguration['strictUsesCoverage']) && !isset($arguments['strictUsesCoverage'])) {
+                $arguments['strictUsesCoverage'] = $phpunitConfiguration['strictUsesCoverage'];
             }
 
             if (isset($phpunitConfiguration['ignoreDeprecatedCodeUnitsFromCodeCoverage']) && !isset($arguments['ignoreDeprecatedCodeUnitsFromCodeCoverage'])) {
@@ -1073,7 +1081,8 @@ class TestRunner extends BaseTestRunner
         $arguments['stopOnRisky']                                     = $arguments['stopOnRisky'] ?? false;
         $arguments['stopOnSkipped']                                   = $arguments['stopOnSkipped'] ?? false;
         $arguments['stopOnWarning']                                   = $arguments['stopOnWarning'] ?? false;
-        $arguments['strictCoverage']                                  = $arguments['strictCoverage'] ?? false;
+        $arguments['strictCoversCoverage']                            = $arguments['strictCoversCoverage'] ?? false;
+        $arguments['strictUsesCoverage']                              = $arguments['strictUsesCoverage'] ?? false;
         $arguments['testdoxExcludeGroups']                            = $arguments['testdoxExcludeGroups'] ?? [];
         $arguments['testdoxGroups']                                   = $arguments['testdoxGroups'] ?? [];
         $arguments['timeoutForLargeTests']                            = $arguments['timeoutForLargeTests'] ?? 60;

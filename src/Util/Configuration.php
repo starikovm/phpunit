@@ -804,8 +804,15 @@ class Configuration
         }
 
         if ($root->hasAttribute('beStrictAboutCoversAnnotation')) {
-            $result['strictCoverage'] = $this->getBoolean(
+            $result[' strictCoversCoverage'] = $this->getBoolean(
                 (string) $root->getAttribute('beStrictAboutCoversAnnotation'),
+                false
+            );
+        }
+
+        if ($root->hasAttribute('beStrictAboutUsesAnnotation')) {
+            $result['strictUsesCoverage'] = $this->getBoolean(
+                (string) $root->getAttribute('beStrictAboutUsesAnnotation'),
                 false
             );
         }
